@@ -1,6 +1,17 @@
 # noteapp
 
-A fast, minimalist Notepad++-style text editor for Windows, macOS, and Linux, built with **Tauri** (Rust) and **React**.
+[![CI](https://github.com/hpatil23/noteapp/actions/workflows/ci.yml/badge.svg)](https://github.com/hpatil23/noteapp/actions/workflows/ci.yml)
+
+**noteapp** is a fast, minimalist desktop text editor for jotting down notes, editing config files, and writing small scripts — without the bloat of a full IDE. It opens instantly, stays out of your way, and looks clean and modern by default.
+
+Built with a Rust backend for speed and a lightweight native webview UI, it runs natively on **Windows, macOS, and Linux**, with a single small installer per platform (no Electron, no Chromium bundle).
+
+## Why noteapp?
+
+- **Fast** — Rust handles file I/O, encoding detection, and settings; the UI is a lightweight native webview, not a bundled browser
+- **Minimal, modern UI** — clean flat toolbar with [Lucide](https://lucide.dev/) icons, light/dark themes, no clutter
+- **Cross-platform** — one codebase, native installers for Windows, macOS, and Linux
+- **Just works** — multi-tab editing, recent files, session restore, and syntax highlighting out of the box
 
 ## Features
 
