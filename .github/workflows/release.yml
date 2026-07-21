@@ -1,21 +1,16 @@
-name: CI
+name: Release
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    tags:
+      - "v*.*.*"
   workflow_dispatch:
 
 permissions:
-  contents: read
-
-concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  contents: write
 
 jobs:
-  build:
+  release:
     strategy:
       fail-fast: false
       matrix:
@@ -28,7 +23,7 @@ jobs:
             name: Windows
 
     runs-on: ${{ matrix.platform }}
-    name: Build (${{ matrix.name }})
+    name: Release (${{ matrix.name }})
 
     steps:
       - name: Checkout
@@ -67,23 +62,12 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci
 
-      - name: Type-check frontend
-        run: npx tsc --noEmit
-
-      - name: Cargo check
-        working-directory: src-tauri
-        run: cargo check
-
-      - name: Build Tauri app
+      - name: Build and publish release
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
         with:
-          name: noteapp-${{ matrix.platform }}
-          path: |
-            src-tauri/target/release/bundle/**
-          if-no-files-found: warn
-          retention-days: 14
+          tagName: ${{ github.ref_name }}
+          releaseName: "noteapp ${{ github.ref_name }}"
+          releaseDraft: true
+          prerelease: false
