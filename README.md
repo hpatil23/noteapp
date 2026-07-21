@@ -72,3 +72,13 @@ src/                  React frontend
 src-tauri/            Rust backend
   src/commands/        file_ops, settings, encoding, watcher
 ```
+
+## Downloads
+
+Every push to `main` runs [CI](.github/workflows/ci.yml), which builds and verifies noteapp on Windows, macOS, and Linux (build artifacts are attached to each run, but require a GitHub login and expire after 14 days).
+
+For a permanent, public download that anyone can grab without logging in, push a version tag (e.g. `git tag v0.1.0 && git push origin v0.1.0`) to trigger the [release workflow](.github/workflows/release.yml), which builds installers for all three platforms and attaches them to a draft [GitHub Release](https://github.com/hpatil23/noteapp/releases) — review and publish it from the Releases page when ready.
+
+## License
+
+[MIT](LICENSE) &copy; Harshal Anil Patil
